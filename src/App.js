@@ -6,41 +6,38 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Home from './panels/Home';
 import Persik from './panels/Persik';
 
-class App extends React.Component {
-	constructor(props) {
-		super(props);
+class Example extends React.Component {
 
-		this.state = {
-			activePanel: 'home',
-			fetchedUser: null,
-		};
-	}
+  constructor () {
+    this.state = {
+      activePanel: 'brand'
+    }
+  }
 
-	componentDidMount() {
-		connect.subscribe((e) => {
-			switch (e.detail.type) {
-				case 'VKWebAppGetUserInfoResult':
-					this.setState({ fetchedUser: e.detail.data });
-					break;
-				default:
-					console.log(e.detail.type);
-			}
-		});
-		connect.send('VKWebAppGetUserInfo', {});
-	}
+  render () {
 
-	go = (e) => {
-		this.setState({ activePanel: e.currentTarget.dataset.to })
-	};
-
-	render() {
-		return (
-			<View activePanel={this.state.activePanel}>
-				<Home id="home" fetchedUser={this.state.fetchedUser} go={this.go} />
-				<Persik id="persik" go={this.go} />
-			</View>
-		);
-	}
+    return (
+      <View activePanel={this.state.activePanel}>
+        <Panel id="brand">
+          <PanelHeader>
+            Настройки
+          </PanelHeader>
+          <Group>
+            <CellButton onClick={() => this.setState({ activePanel: 'light' })}>Альтернативная тема</CellButton>
+          </Group>
+        </Panel>
+        <Panel id="light">
+          <PanelHeader
+            theme="light"
+            left={<HeaderButton onClick={() => this.setState({ activePanel: 'brand' })}>{osname === IOS ? <Icon28ChevronBack /> : <Icon24Back />}</HeaderButton>}
+            addon={<HeaderButton onClick={() => this.setState({ activePanel: 'brand' })}>Назад</HeaderButton>}
+          >
+            Котики
+          </PanelHeader>
+        </Panel>
+      </View>
+    )
+  }
 }
 
-export default App;
+<Example />
