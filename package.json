@@ -7,14 +7,15 @@
   "scripts": {
     "start": "cross-env PORT=10888 react-scripts start",
     "build": "react-scripts build",
-    "deploy": "gh-pages -d build",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "cross-env": "^5.2.0",
+    "gh-pages": "^2.0.1",
     "react-hot-loader": "^4.7.1",
     "react-scripts": "^2.1.5"
   },
@@ -27,5 +28,11 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
